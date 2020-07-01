@@ -54,7 +54,7 @@ function buyItem() {
 							product_sales: (parseFloat(chosenItem.product_sales) + parseFloat(totalPrice)).toFixed(2)
 						},
 						{
-							item_id: chosenItem.item_id
+							product_id: chosenItem.product_id
 						}
 					],
 					function(error) {
@@ -96,11 +96,12 @@ function moreShopping() {
 function readProducts() {
 	connection.query("SELECT * FROM products WHERE stock_quantity > 0", function(err, res) {
 		if (err) throw err;
+		console.log(res);
 		console.log("+----+------------------------------------------+------------------+----------+");
 		console.log("|  # | NAME                                     | DEPARTMENT       | PRICE    |");
 		console.log("+----+------------------------------------------+------------------+----------+");
 		for (let i = 0; i < res.length; i++) {
-			let item_id = res[i].item_id.toString();
+			let item_id = res[i].product_id;
 			let product_name = res[i].product_name;
 			let department_name = res[i].department_name;
 			let price = "$" + res[i].price;
